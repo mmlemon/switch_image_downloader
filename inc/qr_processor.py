@@ -38,7 +38,7 @@ class QRProcessor(object):
         register_cmd = f'netsh wlan set profileparameter name={ssid} keyMaterial={password}'
         print("register wifi")
         subprocess.call(register_cmd)
-#        time.sleep(5)
+        time.sleep(5)
         # wifi 接続コマンド（上のは1回でよいけどチェックするのも面倒なので都度両方呼ぶ）
         set_cmd = f'netsh wlan connect name={ssid}'
         print(f'connect wifi:{ssid}')
