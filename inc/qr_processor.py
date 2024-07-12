@@ -23,9 +23,9 @@ class QRProcessor(object):
         """
         # 二重起動防止
         if self.parsed:
-             return
+             return False
         if mes == self.prevmes:
-            return
+            return False
         self.parsed = True
 
         # QRコードの内容からSSIDとパスワードを取得する
@@ -50,4 +50,4 @@ class QRProcessor(object):
         url = "http://192.168.0.1/index.html"
         self.parse_html(url)
 
-        return
+        return self.parsed

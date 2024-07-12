@@ -3,14 +3,14 @@ from inc.qr_processor import QRProcessor
 
 camera_id = 2
 delay = 1
-window_name = 'nintendo switchの画像取得用QR Codeの読み込み'
+window_name = 'Get media from Nintendo Switch( Press "Q" to quit program)'
 
 qcd = cv2.QRCodeDetector()
 cap = cv2.VideoCapture(camera_id)
 mes = ""
 qrproc = QRProcessor()
-
-while True:
+loopflg = True
+while loopflg:
     ret, frame = cap.read()
     if ret:
         ret_qr, decoded_info, points, _ = qcd.detectAndDecodeMulti(frame)
@@ -18,8 +18,10 @@ while True:
             for s, p in zip(decoded_info, points):
                 if s:
                     print(s)
-                    qrproc.parse(s)
+                    parseResult = qrproc.parse(s)
                     color = (0, 255, 0)
+                    if parseResult:
+                        loopflg = False
                     break
                 else:
                     color = (0, 0, 255)
